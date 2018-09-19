@@ -1,0 +1,12 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>
+      Pockeyt Pay
+    </ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+	<list-layout *ngIf="!isSplitPane"></list-layout>
+	<customer-pager *ngIf="isSplitPane"></customer-pager>
+</ion-content>

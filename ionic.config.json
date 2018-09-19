@@ -1,0 +1,7 @@
+{
+  "name": "com.pockeytPayDefault",
+  "integrations": {
+    "cordova": {}
+  },
+  "type": "ionic-angular"
+}

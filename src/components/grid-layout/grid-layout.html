@@ -1,0 +1,10 @@
+<ion-grid class="scroll">
+	<ion-row>
+		<ion-col col-4 *ngFor="let customer of customers">
+			<div text-center (click)="selectCustomer(customer)">
+				<img [ngClass]="highLightedCustomerId == customer.id ? 'highlight' : ''" class="customer-avatar" src="{{ customer.smallPhoto }}">
+				<h2>{{ customer.firstName }} {{ customer.lastName }}</h2>
+			</div>
+		</ion-col>
+	</ion-row>
+</ion-grid>

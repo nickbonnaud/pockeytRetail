@@ -1,0 +1,8 @@
+<ion-split-pane [when]="isSplitPane">
+	<ion-menu [content]="content">
+		<ion-content>
+			<grid-layout></grid-layout>
+		</ion-content>
+	</ion-menu>
+	<ion-nav [root]="rootPage" main #content></ion-nav>
+</ion-split-pane>

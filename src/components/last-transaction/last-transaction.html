@@ -1,0 +1,30 @@
+<ion-card>
+	<ion-item class="receipt-header">
+		<ion-avatar item-start>
+			<img src="{{ user.logo }}">
+		</ion-avatar>
+		<h2 text-wrap>{{ user.businessName }}</h2>
+		<p>{{ customer.lastTransaction.purchasedOn | fromNow }}</p>
+	</ion-item>
+
+	<ion-card-content class="receipt-content">
+		<ion-list>
+			<ion-item *ngFor="let product of customer.lastTransaction.purchasedItems">
+				<p item-start>{{ product.quantity > 1 ? product.quantity : '' }}  {{ product.name }}</p>
+				<p item-end>{{ ((product.price * product.quantity) / 100) | currency:'USD':'symbol-narrow':'1.2-2' }}</p>
+			</ion-item>
+			<ion-item class="receipt-tax">
+				<p item-start="">Tax</p>
+				<p item-end>{{ customer.lastTransaction.tax / 100 | currency:'USD':'symbol-narrow':'1.2-2' }}</p>
+			</ion-item>
+			<ion-item>
+				<p item-start>Tip</p>
+				<p item-end>{{ customer.lastTransaction.tip / 100 | currency:'USD':'symbol-narrow':'1.2-2' }}</p>
+			</ion-item>
+			<ion-item>
+				<p item-start class="receipt-bottom">Total</p>
+				<p item-end class="receipt-bottom">{{ customer.lastTransaction.total / 100 | currency:'USD':'symbol-narrow':'1.2-2' }}</p>
+			</ion-item>
+		</ion-list>
+	</ion-card-content>
+</ion-card>

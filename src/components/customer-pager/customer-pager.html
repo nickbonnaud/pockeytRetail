@@ -1,0 +1,16 @@
+<ng-container>
+    <ion-toolbar position="top">
+        <ion-segment [(ngModel)]="selection">
+        	<ion-segment-button value="{{ KEY_CHARGE }}">
+        		Charge
+        	</ion-segment-button>
+        	<ion-segment-button value="{{ KEY_ABOUT }}">
+        		About
+        	</ion-segment-button>
+        </ion-segment>
+    </ion-toolbar>
+    <div>
+        <customer-charge [customer]="customer" *ngIf="selection == KEY_CHARGE"></customer-charge>
+        <customer-about [customer]="customer" [user]="user" *ngIf="selection == KEY_ABOUT"></customer-about>
+    </div>
+</ng-container>

@@ -1,0 +1,4 @@
+<div [ngClass]="customer ? 'scroll' : ''">
+	<viewed-post *ngIf="customer && customer.lastPostInteraction.hasInteraction" [customer]="customer" [user]="user"></viewed-post>
+	<last-transaction *ngIf="customer && customer.lastTransaction.hasRecent" [customer]="customer" [user]="user"></last-transaction>
+</div>

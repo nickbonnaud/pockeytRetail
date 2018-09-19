@@ -1,0 +1,21 @@
+last-transaction {
+	.receipt-header {
+		border-bottom: 2px solid #dcd9d9 !important;
+    background-color: #f3f3f3;
+	}
+
+	.receipt-content {
+		padding-top: 5px !important;
+	}
+
+	.receipt-tax {
+		border-top: 2px dotted #a9a9a9 !important;
+    margin-top: 10px;
+    padding-top: 10px;
+	}
+
+	.receipt-bottom {
+		font-size: 1.6rem;
+    font-weight: bold;
+	}
+}

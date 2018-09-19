@@ -1,0 +1,8 @@
+<ion-list>
+	<ion-item *ngFor="let customer of customers" (click)="goToDetailsPage(customer)">
+		<ion-avatar item-start class="avatar-size">
+			<img [ngClass]="highLightedCustomerId == customer.id ? 'highlight' : ''" src="{{ customer.smallPhoto }}">
+		</ion-avatar>
+		<h1>{{ customer.firstName }} {{ customer.lastName }}</h1>
+	</ion-item>
+</ion-list>

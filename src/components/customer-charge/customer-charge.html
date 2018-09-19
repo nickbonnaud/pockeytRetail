@@ -1,0 +1,30 @@
+<div [ngClass]="customer ? 'scroll' : ''">
+	<div text-center *ngIf="customer">
+		<div class="avatar-container">
+			<img class="customer-avatar" src="{{ customer.largePhoto }}">
+		</div>
+		<h2>{{ customer.firstName }} {{ customer.lastName }}</h2>
+
+		<p *ngIf="customer.loyaltyCard.hasReward && !isLoadingLoyalty"><ion-icon class="mr-10" name="trophy"></ion-icon>{{ customer.firstName }} has earned a {{ customer.loyaltyCard.reward | lowercase }}!</p>
+		<p *ngIf="customer.loyaltyCard.hasReward && isLoadingLoyalty"><ion-icon class="mr-10" name="send"></ion-icon>Waiting for {{ customer.firstName }} to approve Reward redemtion!</p>
+
+		<p *ngIf="customer.deal.hasDeal && !isLoadingDeal"><ion-icon class="mr-10" name="pricetag"></ion-icon>{{ customer.firstName }} can redeem a {{ customer.deal.dealItem | lowercase }}!</p>
+		<p *ngIf="customer.deal.hasDeal && isLoadingDeal"><ion-icon class="mr-10" name="send"></ion-icon>Waiting for {{ customer.firstName }} to approve Deal redemption!</p>
+
+		<button (click)="redeemLoyalty()" class="mt-10" *ngIf="customer.loyaltyCard.hasReward" ion-button block color="primary" [disabled]="isLoadingLoyalty">
+			<ion-spinner *ngIf="isLoadingLoyalty" color="light"></ion-spinner>
+			{{ isLoadingLoyalty ? '' : 'Redeem Loyalty Reward '}}
+		</button>
+		<button (click)="redeemDeal()" class="mt-10" *ngIf="customer.deal.hasDeal" ion-button block color="primary" [disabled]="isLoadingDeal">
+			<ion-spinner *ngIf="isLoadingDeal" color="light"></ion-spinner>
+			{{ isLoadingDeal ? '' : 'Redeem Deal' }}
+		</button>
+	</div>
+
+	<div text-center *ngIf="!customer">
+		<div class="noCustomerContainer" #noCustomerContainer>
+			<ion-icon [ngStyle]="{ 'font-size': noCustomerIconWidth }" class="profile-icon" name="contact"></ion-icon>
+		</div>
+		<h2>No Customer Selected</h2>
+	</div>
+</div>

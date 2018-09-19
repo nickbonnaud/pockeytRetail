@@ -1,0 +1,118 @@
+// http://ionicframework.com/docs/theming/
+
+
+// App Global Sass
+// --------------------------------------------------
+// Put style rules here that you want to apply globally. These
+// styles are for the entire app and not just one component.
+// Additionally, this file can be also used as an entry point
+// to import other Sass files to be included in the output CSS.
+//
+// Shared Sass variables, which can be used to adjust Ionic's
+// default Sass variables, belong in "theme/variables.scss".
+//
+// To declare rules for a specific mode, create a child rule
+// for the .md, .ios, or .wp mode classes. The mode class is
+// automatically applied to the <body> element in the app.
+
+.toast-error .toast-message {
+	background: #c0392b;
+	text-align: center;
+	font-size: 2rem;
+}
+
+.error-notify-toast .toast-message:before {
+  content: '\f103';
+  color: white;
+  display: inline-block;
+  font-family: "Ionicons";
+  font-style: normal;
+  font-weight: bolder;
+  font-variant: normal;
+  text-transform: none;
+  text-rendering: auto;
+  line-height: 1;
+  -webkit-font-smoothing: antialiased;
+  padding-right: 10px;
+  font-size: 2rem;
+}
+
+.notif-deal-reward-deny-toast {
+  .toast-wrapper {
+    background: #f39c12;
+
+    .toast-message {
+      background: #f39c12;
+      color: white;
+    }
+  }
+
+  button {
+    background: #f39c12;
+    color: white;
+  }
+}
+
+.notif-deal-reward-accept-toast {
+  .toast-wrapper {
+    background: #27ae60;
+
+    .toast-message {
+      background: #27ae60;
+      color: white;
+    }
+  }
+
+  button {
+    background: #27ae60;
+    color: white;
+  }
+}
+
+.notif-pay-error-toast {
+  .toast-wrapper {
+    background: #c0392b;
+
+    .toast-message {
+      background: #c0392b;
+      color: white;
+    }
+  }
+
+  button {
+    background: #c0392b;
+    color: white;
+  }
+}
+
+.notif-exit-toast {
+  .toast-wrapper {
+    background: #f39c12;
+
+    .toast-message {
+      background: #f39c12;
+      color: white;
+    }
+  }
+
+  button {
+    background: #f39c12;
+    color: white;
+  }
+}
+
+.notif-enter-toast {
+  .toast-wrapper {
+    background: #27ae60;
+
+    .toast-message {
+      background: #27ae60;
+      color: white;
+    }
+  }
+
+  button {
+    background: #27ae60;
+    color: white;
+  }
+}

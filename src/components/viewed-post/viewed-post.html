@@ -1,0 +1,25 @@
+<ion-card>
+	<ion-item>
+		<ion-avatar item-start>
+			<img src="{{ user.logo }}">
+		</ion-avatar>
+		<ion-row class="business-name-row">
+			<h2 text-wrap>{{ user.businessName }}</h2>
+		</ion-row>
+		<ion-note>{{ customer.firstName }} viewed {{ customer.lastPostInteraction.viewedOn | fromNow }}</ion-note>
+	</ion-item>
+
+	<img src="{{ customer.lastPostInteraction.photo }}">
+
+	<ion-card-content *ngIf="!customer.lastPostInteraction.isEvent">
+		<p>{{ customer.lastPostInteraction.message | limit }}</p>
+	</ion-card-content>
+
+	<ion-card-content *ngIf="customer.lastPostInteraction.isEvent">
+		<ion-card-title>
+			{{ customer.lastPostInteraction.title }}
+		</ion-card-title>
+		<hr>
+		<p>{{ customer.lastPostInteraction.body | limit }}</p>
+	</ion-card-content>
+</ion-card>

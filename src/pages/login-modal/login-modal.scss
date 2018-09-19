@@ -1,0 +1,41 @@
+page-login-modal {
+
+	.invalid {
+    border: 1px solid #ea6153;
+  }
+
+  p {
+  	font-size: 0.8em;
+    color: #d2d2d2;
+  }
+
+  ion-label {
+    margin-left: 10px !important;
+  }
+
+  ion-input {
+    background-color: #f2f2f2;
+    padding: 5px 10px;
+  }
+
+  ion-spinner {
+    height: 18px;
+    width: 18px;
+  }
+
+	.pl-8 {
+    padding-left: 8px;
+  }
+
+  .ml-8 {
+    margin-left: 8px !important;
+  }
+
+  .mr-8 {
+    margin-right: 8px;
+  }
+
+  .mr-10 {
+    margin-right: 10px;
+  }
+}
