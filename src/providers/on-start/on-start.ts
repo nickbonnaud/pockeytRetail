@@ -28,8 +28,8 @@ export class OnStartProvider {
   		this.layoutManager.init();
       this.pusherHandler.init();
       this.customersManager.init();
-      // this.beaconManager.requestAuthorization();
-      // this.beaconManager.init();
+      this.beaconManager.requestAuthorization();
+      this.beaconManager.init();
 	  	this.auth.init().then((isLoggedIn: boolean) => {
 	  		resolve(isLoggedIn);
 	  	});

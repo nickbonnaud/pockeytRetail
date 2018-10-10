@@ -53,10 +53,7 @@ export class CustomersManagerProvider {
   	let customerGet = this.api.get(endpoint, undefined, undefined, undefined, header).subscribe((response: any) => {
       let customers: Customer[] = [];
       for (let httpCustomer of response.data) {
-        for (var i = 15 - 1; i >= 0; i--) {
-          var cloneCustomer = httpCustomer;
-          customers.push((new HttpCustomer(cloneCustomer)).getCustomer());
-        }
+        customers.push((new HttpCustomer(httpCustomer)).getCustomer());
       }
       this.customers = customers;
       this.setCustomers(customers);

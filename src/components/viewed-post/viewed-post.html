@@ -12,7 +12,7 @@
 	<img src="{{ customer.lastPostInteraction.photo }}">
 
 	<ion-card-content *ngIf="!customer.lastPostInteraction.isEvent">
-		<p>{{ customer.lastPostInteraction.message | limit }}</p>
+		<p>{{ customer.lastPostInteraction.message | limit:'med'}}</p>
 	</ion-card-content>
 
 	<ion-card-content *ngIf="customer.lastPostInteraction.isEvent">
@@ -20,6 +20,6 @@
 			{{ customer.lastPostInteraction.title }}
 		</ion-card-title>
 		<hr>
-		<p>{{ customer.lastPostInteraction.body | limit }}</p>
+		<p>{{ customer.lastPostInteraction.body | limit:'med'}}</p>
 	</ion-card-content>
 </ion-card>

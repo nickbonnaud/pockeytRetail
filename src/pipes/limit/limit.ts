@@ -9,10 +9,12 @@ import { Pipe, PipeTransform } from '@angular/core';
   name: 'limit',
 })
 export class LimitPipe implements PipeTransform {
-  /**
-   * Takes a value and makes it lowercase.
-   */
-  transform(value: string) {
-    return value.slice(0, 30) + '...';
+ 
+  transform(value: string, size: string) {
+  	if (size == 'sm') {
+  		return value.length > 15 ? value.slice(0, 15) + '...' : value;
+  	} else if (size == 'med') {
+  		return value.length > 30 ? value.slice(0, 30) + '...' : value;
+  	}
   }
 }

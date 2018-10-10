@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { IBeacon, IBeaconDelegate, BeaconRegion, IBeaconPluginResult } from '@ionic-native/ibeacon';
 import { Platform, Alert } from 'ionic-angular';
+import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 
 import { AuthToken } from '../../models/auth-token';
 import { Beacon } from '../../models/beacon';
@@ -18,7 +19,13 @@ import { AlertProvider } from '../alert/alert';
 @Injectable()
 export class BeaconManagerProvider {
 	private IOS_DEVICE: string = "ios";
+  private BEACON_ALERT_CANCEL_SELECTION: string = "cancel";
+  private BEACON_ALERT_STOP_SELECTION: string = "stop";
 	private beacon: Beacon
+  private isRunning: boolean;
+
+  public beaconRunningSource = new BehaviorSubject<boolean>(false);
+  beaconRunningSource$ = this.beaconRunningSource.asObservable();
 
   constructor(
   	private api: ApiProvider,
@@ -46,18 +53,71 @@ export class BeaconManagerProvider {
   }
 
   startBeacon() {
-  	if (this.platform.is(this.IOS_DEVICE)) {
-  		this.startIosBeacon();
-  	}
+    if (!this.isRunning) {
+      this.setIsRunning(true);
+      if (this.platform.is(this.IOS_DEVICE)) {
+        this.startIosBeacon();
+      } else {
+        this.startAndroidBeacon();
+      }
+    }
+  }
+
+  stopBeacon() {
+    let alert: Alert = this.showStopBeaconWarning();
+    alert.onDidDismiss((selection: string) => {
+      if (selection == this.BEACON_ALERT_STOP_SELECTION) {
+        if (this.isRunning) {
+          this.setIsRunning(false);
+          if (this.platform.is(this.IOS_DEVICE)) {
+            this.stopIosBeacon();
+          } else {
+            this.stopAndroidBeacon();
+          }
+        }
+      }
+    })
+    alert.present();
+  }
+
+  showStopBeaconWarning() {
+    const title: string = "Warning! You are turning off the Pockeyt Beacon!";
+    const message: string = "This Beacon is required for Pockeyt Pay to work.";
+    const buttons: Array<any> = [
+      { text: "Cancel", role: null, selection: this.BEACON_ALERT_CANCEL_SELECTION },
+      { text: "Stop Beacon", role: "cancel", selection: this.BEACON_ALERT_STOP_SELECTION }
+    ]
+    return this.alert.showConfirmation(title, message, buttons);
   }
 
   startIosBeacon() {
   	let beaconRegion: BeaconRegion = this.iBeacon.BeaconRegion(this.beacon.identifier, this.beacon.uuid);
-  	this.iBeacon.startAdvertising(beaconRegion).then(() => {
-  		this.iBeacon.isAdvertising().then((result: boolean) => {
-  			console.log('Is advertising: ' + result);
-  		})
-  	});
+  	this.iBeacon.startAdvertising(beaconRegion);
+  }
+
+  stopIosBeacon() {
+    this.iBeacon.isAdvertising().then((isAdvertising: boolean) => {
+      if (isAdvertising) {
+        let beaconRegion: BeaconRegion = this.iBeacon.BeaconRegion(this.beacon.identifier, this.beacon.uuid);
+        this.iBeacon.stopAdvertising(beaconRegion);
+      }
+    });
+  }
+
+  startAndroidBeacon() {
+    window['plugins'].beaconPlugin.start(this.beacon.uuid, function() {
+      console.log("Success beacon Started");
+    }, function(err) {
+      console.log("Error " + err);
+    });
+  }
+
+  stopAndroidBeacon() {
+    window['plugins'].beaconPlugin.stop(function() {
+      console.log("Stop success");
+    }, function(err) {
+      console.log("error " + err);
+    });
   }
 
  	isReadyToAdvertise() {
@@ -91,5 +151,10 @@ export class BeaconManagerProvider {
  	requestAuthorization() {
  		this.iBeacon.requestAlwaysAuthorization();
  	}
+
+  setIsRunning(isRunning: boolean) {
+    this.isRunning = isRunning;
+    this.beaconRunningSource.next(isRunning);
+  }
 
 }

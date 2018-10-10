@@ -3,6 +3,11 @@
     <ion-title>
       Customer Details
     </ion-title>
+    <ion-buttons end>
+    	<button (click)="toggleBeacon()" ion-button icon-only [color]="beaconRunning ? 'primary' : 'secondary'">
+    		<ion-icon [name]="beaconRunning ? 'ios-radio' : 'ios-radio-outline'"></ion-icon>
+      </button>
+    </ion-buttons>
   </ion-navbar>
 </ion-header>
 

@@ -20,4 +20,21 @@ export class AlertProvider {
   	});
   }
 
+  showConfirmation(title: string, message: string, buttons: Array<any>) {
+    let confirm = this.alertCtrl.create({enableBackdropDismiss: false});
+    confirm.setTitle(title);
+    confirm.setMessage(message);
+    buttons.forEach(button => {
+      confirm.addButton({
+        text: button.text,
+        role: button.role,
+        handler: () => {
+          confirm.dismiss(button.selection);
+          return false;
+        }
+      });
+    });
+   return confirm;
+  }
+
 }
